@@ -1,0 +1,66 @@
+
+ EXERCISE DIRECTIONS
+ -------------------
+
+ The following instructions assume a GNU/Linux based x86 environment, equipped
+ with the standard GNU build tools (GCC, Make, Binutils) and the nasm assembler.
+ On a 64-bit platform GCC multilib support may be needed).
+
+
+ Straight to the point directions.
+ ---------------------------------
+
+ 1) Fix ex1.asm so as to comply with Linux x86 ABI.
+
+ 2) Create a minimal equivalent program ex1.c.
+
+ 3) Reimplement ex1.asm's 'write' in a program ex2 (either in c or or asembly).
+
+ 4) Create a library libex2.so out ex2 (ex2.c or ex2.asm).
+
+ 5) Modify ex1.c to call the function implemented by libex2.so.
+
+ 6) Build ex1 out of ex1.c and libex2.so.
+
+ 7) Create an automate build setup based on Make to
+
+    	   libex2.o out of exe.c
+    	   ex1 out of ex1.c and libexe.so
+    
+    and to install the programs, respectively in
+
+    	   $(PREFIX)/usr/bin
+	   $(PREFIX)/usr/lib
+
+    where PREFIX is a user variable passed to Make during the build.
+
+    The program should run for any chosen PREFIX.
+    
+    Mekfile should support at least targets
+
+    	    all        (default), build everything
+	    clean      restore directory to the pre-build state.
+	    install    copy build files into the proper directories
+	    uninstall  undue install actions
+    
+
+ Requirements
+ -------------
+
+ Intel x86 based hardware platform.
+
+ GNU/Linux runtime  with kernel 4 or above
+ (eg. Ubuntu 18.10)
+
+
+ GNU C compiler for the x32 architecture
+ (eg: apt install gcc-multilib-x86-64-linux-gnux32)
+
+
+ The NASM General-purpose x86 assembler
+ (eg: apt install install nasm)
+
+ GNU Make
+ (eg: apt install make)
+
+
