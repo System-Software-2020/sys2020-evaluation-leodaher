@@ -2,17 +2,19 @@ BUILD_DIR=./build
 FLAGS=-m32
 LD_FLAGS=-Wl,-rpath=\$$ORIGIN -Wl,-rpath=\$$ORIGIN/../lib
 
-all: ex1
+all: $(BUILD_DIR)/ex1 
 
-build_dir:
+$(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
 
-libex2.so: build_dir
-	gcc $(FLAGS) -c -I. ex2.c -o $(BUILD_DIR)/ex2.o
-	gcc $(FLAGS) -fpic -shared $(BUILD_DIR)/ex2.o -o $(BUILD_DIR)/libex2.so
+$(BUILD_DIR)/libex2.so: $(BUILD_DIR)/ex2.o | $(BUILD_DIR)
+	gcc $(FLAGS) -fpic -shared $< -o $@
 
-ex1: libex2.so
-	gcc $(FLAGS) -m32 -I. -L$(BUILD_DIR) $(LD_FLAGS) ex1.c -lex2 -o $(BUILD_DIR)/ex1
+$(BUILD_DIR)/ex1: $(BUILD_DIR)/libex2.so | $(BUILD_DIR) 
+	gcc $(FLAGS) -m32 -I. -L $(BUILD_DIR) $(LD_FLAGS) ex1.c -lex2 -o $(BUILD_DIR)/ex1
+
+$(BUILD_DIR)/%.o : %.c | $(BUILD_DIR)
+	gcc $(FLAGS) -c -I. $< -o $@
 
 install:
 	mkdir -p $(PREFIX)/usr/bin $(PREFIX)/usr/lib
