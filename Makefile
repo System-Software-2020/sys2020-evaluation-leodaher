@@ -1,6 +1,6 @@
 BUILD_DIR=./build
 FLAGS=-m32
-LD_FLAGS=-Wl,-rpath,../lib
+LD_FLAGS=-Wl,-rpath=\$$ORIGIN -Wl,-rpath=\$$ORIGIN/../lib
 
 all: ex1
 
