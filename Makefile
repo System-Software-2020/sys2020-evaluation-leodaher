@@ -12,7 +12,7 @@ libex2.so: build_dir
 	gcc $(FLAGS) -fpic -shared $(BUILD_DIR)/ex2.o -o $(BUILD_DIR)/libex2.so
 
 ex1: libex2.so
-	gcc $(FLAGS) -m32 -I. -L. $(LD_FLAGS) ex1.c -lex2 -o $(BUILD_DIR)/ex1
+	gcc $(FLAGS) -m32 -I. -L$(BUILD_DIR) $(LD_FLAGS) ex1.c -lex2 -o $(BUILD_DIR)/ex1
 
 install:
 	mkdir -p $(PREFIX)/usr/bin $(PREFIX)/usr/lib
