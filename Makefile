@@ -20,8 +20,8 @@ install:
 	cp $(BUILD_DIR)/libex2.so $(PREFIX)/usr/lib/
 
 uninstall:
-	rm $(PREFIX)/usr/bin/ex1
-	rm $(PREFIX)/usr/lib/libex2.so
+	rm -f $(PREFIX)/usr/bin/ex1
+	rm -f $(PREFIX)/usr/lib/libex2.so
 
 clean:
 	rm -rf ./build
